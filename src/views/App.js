@@ -1,12 +1,15 @@
 import React from 'react';
-import '../styles/App.scss';
-import Header from '../components/header';
+import '../styles/app.scss';
+import Header from '../components/Header';
+import Container from '../components/Container';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      This is the main app.
+      <div className="app-body">
+        <Container />
+      </div>
     </div>
   );
 }

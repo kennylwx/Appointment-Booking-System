@@ -1,0 +1,13 @@
+@import "./global.scss";
+
+.app {
+  // background-color: grey;
+
+  .app-body {
+    padding: 50px $side-padding;
+
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+  }
+}

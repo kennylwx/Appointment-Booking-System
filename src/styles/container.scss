@@ -1,0 +1,40 @@
+@import "./global.scss";
+
+.container {
+  max-width: 420px;
+  width: 100%;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+
+  position: relative;
+
+  .container-header {
+    padding: 12px 20px;
+    background-color: $header-background-color;
+    @include border-radii(10px, 10px, 0, 0);
+
+    .ch-title {
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 2px;
+      color: $header-title-color;
+    }
+
+    .ch-subtitle {
+      font-weight: 400;
+      font-size: 14px;
+      margin: 0 0 2px;
+      color: $header-title-color;
+    }
+  }
+
+  .container-body {
+    background-color: $body-background-color;
+  }
+
+  .container-footer {
+    background-color: $body-background-color;
+    @include border-radii(0, 0, 4px, 4px);
+    padding: 12px 20px;
+  }
+}

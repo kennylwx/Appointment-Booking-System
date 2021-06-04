@@ -1,0 +1,21 @@
+@import "./global.scss";
+
+.header {
+  background-color: white;
+  height: 50px;
+  border-bottom: 1px solid $border-color;
+
+  padding: 0px $side-padding;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .left-items {
+    // background-color: yellow;
+  }
+
+  .right-items {
+    // background-color: yellow;
+  }
+}
