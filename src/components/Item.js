@@ -1,27 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/item.scss';
-import ProfileSelection from './ProfileSelection';
 
-function Item() {
+function Item({ number, title, body }) {
   return (
     <div className="item">
       <div className="item-header">
         <div className="item-id">
-          1
+          {number}
         </div>
         <h3 className="item-title">
-          Select one of our professionals
+          {title}
         </h3>
       </div>
 
       <div className="item-body">
-        <ProfileSelection />
+
+        {body}
       </div>
-
-      Hey Look
-
     </div>
   );
 }
 
 export default Item;
+
+Item.propTypes = {
+  number: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.element.isRequired,
+};

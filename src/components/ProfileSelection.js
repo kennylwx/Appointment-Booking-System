@@ -1,78 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, DotGroup,
-} from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import '../styles/profile-selection.scss';
-import ProfileImage1 from '../assets/image/profile_1.jpg';
-import ProfileImage2 from '../assets/image/profile_2.jpg';
-import ProfileImage3 from '../assets/image/profile_3.jpg';
-import ProfileImage4 from '../assets/image/profile_4.jpg';
+} from 'pure-react-carousel';
+
+import { listOfProfessionals, schedule } from '../data';
+
 import { ReactComponent as Arrow } from '../assets/icon/arrow.svg';
 
-function ProfileSelection() {
-  // eslint-disable-next-line no-unused-vars
-  const listOfProfessionals = [
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import '../styles/profile-selection.scss';
 
-    {
-      name: 'Kent Zerna',
-      title: 'Personal Injury Lawyer',
-      id: 1,
-      img: ProfileImage1,
+function ProfileSelection({ profileList }) {
+  const INITIAL_SLIDE = 0;
+  const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
+  const onButtonBack = () => {
+    setCurrentSlide(currentSlide - 1);
+  };
 
-    },
-    {
-      name: 'Nikky Gucci',
-      title: 'Clinical Negligence Lawyer',
-      id: 2,
-      img: ProfileImage2,
-
-    },
-    {
-      name: 'Rowdy Haks',
-      title: 'Criminal Lawyer',
-      id: 3,
-      img: ProfileImage3,
-
-    },
-    {
-      name: 'Tham Hans',
-      title: 'Employment Lawyer',
-      id: 4,
-      img: ProfileImage4,
-
-    },
-  ];
-
-  const onProfileSelect = () => {
-    console.log('HELLO');
+  const onButtonNext = () => {
+    setCurrentSlide(currentSlide + 1);
   };
 
   return (
+    <>
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={20}
+        totalSlides={profileList.length}
+        orientation="horizontal"
+        dragEnabled={false}
+        touchEnable={false}
+        visibleSlides={1}
+        step={1}
+        lockOnWindowScroll
+        currentSlide={currentSlide}
+      >
 
-    <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={20}
-      totalSlides={listOfProfessionals.length}
-      orientation="horizontal"
-      dragEnabled
-      visibleSlides={1}
-      step={1}
-      lockOnWindowScroll
-    >
-
-      <div className="carousel-container">
-        <Slider className="slider-container">
-
-          {
-          listOfProfessionals.map(({
+        <div className="carousel-container">
+          <Slider className="slider-container">
+            {
+          profileList.map(({
             name, title, img,
           }, index) => (
             <Slide
               className="slider-item"
               index={index}
-              onFocus={() => { onProfileSelect(); }}
             >
 
               <div className="profile">
@@ -91,15 +65,137 @@ function ProfileSelection() {
           ))
           }
 
-        </Slider>
+          </Slider>
 
-        <ButtonBack className="button-back left"><Arrow /></ButtonBack>
-        <ButtonNext className="button-next right"><Arrow /></ButtonNext>
+          <ButtonBack
+            className="button-back left"
+            onClick={() => { onButtonBack(); }}
+          >
+            <Arrow />
+          </ButtonBack>
+          <ButtonNext
+            className="button-next right"
+            onClick={() => { onButtonNext(); }}
+          >
+            <Arrow />
+          </ButtonNext>
+        </div>
+        <DotGroup className="dot-group" />
+      </CarouselProvider>
+
+      {/* {currentSlide} */}
+
+      <div className="big-profile">
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Background</h3>
+          </div>
+          <div className="bps-body">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ullamcorper a lacus vestibulum sed arcu non odio euismod lacinia.
+              Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.
+            </p>
+          </div>
+        </div>
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Spoken language</h3>
+          </div>
+          <div className="bps-body">
+            <p>English, and French</p>
+          </div>
+
+        </div>
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Education</h3>
+          </div>
+          <div className="bps-body">
+            <div className="education-item">
+              <div className="ei-info">
+                <h4>University of Melbourne</h4>
+                <p>Bachelor of Law</p>
+              </div>
+              <div className="ei-date">
+                <p>2020</p>
+              </div>
+            </div>
+            <div className="education-item">
+              <div className="ei-info">
+                <h4>University of Sydney</h4>
+                <p>Bachelor of Science (Sociology)</p>
+              </div>
+              <div className="ei-date">
+                <p>2016</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Contact</h3>
+          </div>
+          <div className="bps-body">
+            <a href="tel:02-9876-5432">(02) 9876 5432</a>
+          </div>
+        </div>
+
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Available Hours</h3>
+          </div>
+          <div className="bps-body">
+            <table>
+              {
+                schedule.map(({ day, time }) => (
+                  <tr>
+                    <td>
+                      <p>{day}</p>
+                    </td>
+                    <td>
+                      <p>{time}</p>
+                    </td>
+                  </tr>
+                ))
+              }
+            </table>
+          </div>
+        </div>
+
+        <div className="bp-section">
+          <div className="bps-header">
+            <h3>Prices</h3>
+          </div>
+          <div className="bps-body">
+            <table>
+              <tr>
+                <td>
+                  <p>Consultation (30min)</p>
+                </td>
+                <td>
+                  <p>$220</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
       </div>
-      <DotGroup className="dot-group" />
 
-    </CarouselProvider>
+    </>
   );
 }
 
 export default ProfileSelection;
+
+ProfileSelection.defaultProps = {
+  profileList: listOfProfessionals,
+};
+
+ProfileSelection.propTypes = {
+  profileList: PropTypes.arrayOf(PropTypes.object),
+};

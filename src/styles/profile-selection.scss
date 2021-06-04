@@ -1,25 +1,35 @@
 @import "./global.scss";
 
+$action-active-color: #583700;
+$action-inactive-color: #dfdfdf;
+
+$profile-title: #201607;
+$profile-desc: #271c0a;
+
+$section-title-color: #3f2e15;
+$section-body-color: #2f1f01;
+
+$section-h4-color: #a8771a;
+$section-h5-color: #2f1f01;
+
 .slider-container {
   padding: 12px 0;
 
   .slider-item {
-    // background-color: green;
-
     .profile {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
 
-      // background-color: orange;
       height: 100%;
       width: 80%;
       margin: 0 auto;
       padding: 0 12px;
 
-      // border: 1px solid $border-color;
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      @include border-radius(4px);
+
       .profile-img {
         height: 45px;
         width: 45px;
@@ -34,17 +44,21 @@
         .profile-name {
           margin: 0;
           font-weight: 500;
-          color: #2b1a00;
+          color: $profile-title;
         }
 
         .profile-title {
           margin: 0;
           font-weight: 400;
-          color: #3f2701;
+          color: $profile-desc;
         }
       }
     }
   }
+}
+
+.carousel__slide-focus-ring {
+  outline: 0;
 }
 
 .carousel-container {
@@ -81,7 +95,7 @@
     width: 16px;
 
     path {
-      fill: #583700;
+      fill: $action-active-color;
     }
   }
 }
@@ -91,7 +105,7 @@
 
   svg {
     path {
-      fill: #dfdfdf;
+      fill: $action-inactive-color;
     }
   }
 }
@@ -113,9 +127,6 @@
   @extend .circle;
 }
 
-.carousel__back-button:disabled {
-}
-
 .dot-group {
   text-align: center;
 
@@ -123,12 +134,72 @@
     margin-right: 2px;
     border: none;
     height: 4px !important;
-    background-color: rgb(230, 230, 230);
+    background-color: $action-inactive-color;
   }
 
   .carousel__dot--selected {
     height: 4px !important;
-    background-color: #694100;
+    background-color: $action-active-color;
     @include border-radius(1px);
+  }
+}
+
+.big-profile {
+  margin-top: 6px;
+
+  .bp-section {
+    margin: 0 0 12px;
+
+    .bps-header {
+      h3 {
+        margin: 0 0 4px;
+        font-size: 14px;
+        color: $section-title-color;
+      }
+    }
+
+    .bps-body {
+      p {
+        margin: 0;
+        font-size: 14px;
+        color: $section-body-color;
+      }
+      h4 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: $section-h4-color;
+      }
+
+      a {
+        font-size: 14px;
+        font-weight: 600;
+        color: $section-h4-color;
+        text-decoration: none;
+      }
+
+      .education-item {
+        margin-bottom: 6px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .ei-date {
+          font-weight: 600;
+        }
+      }
+
+      table {
+        width: 100%;
+        border-spacing: 0;
+
+        tr td:nth-child(2) {
+          text-align: right;
+        }
+      }
+
+      .contact {
+      }
+    }
   }
 }
