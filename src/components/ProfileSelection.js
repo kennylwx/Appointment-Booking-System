@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, DotGroup,
-
 } from 'pure-react-carousel';
 
-import { listOfProfessionals, schedule } from '../data';
+import { listOfProfessionals } from '../data';
+// eslint-disable-next-line no-unused-vars
+import { normaliseArrayToSentence, sanitisePhoneNumber } from '../functions';
 
 import { ReactComponent as Arrow } from '../assets/icon/arrow.svg';
 
@@ -41,30 +42,29 @@ function ProfileSelection({ profileList }) {
         <div className="carousel-container">
           <Slider className="slider-container">
             {
-          profileList.map(({
-            name, title, img,
-          }, index) => (
-            <Slide
-              className="slider-item"
-              index={index}
-            >
+            profileList.map(({
+              name, title, img,
+            }, index) => (
+              <Slide
+                className="slider-item"
+                index={index}
+              >
 
-              <div className="profile">
-                <img className="profile-img" src={img} alt={`${name}-profile`} />
-                <div className="profile-info">
+                <div className="profile">
+                  <img className="profile-img" src={img} alt={`${name}-profile`} />
+                  <div className="profile-info">
 
-                  <h4 className="profile-name">
-                    {name}
-                  </h4>
-                  <h5 className="profile-title">
-                    {title}
-                  </h5>
+                    <h4 className="profile-name">
+                      {name}
+                    </h4>
+                    <h5 className="profile-title">
+                      {title}
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </Slide>
-          ))
-          }
-
+              </Slide>
+            ))
+            }
           </Slider>
 
           <ButtonBack
@@ -91,11 +91,8 @@ function ProfileSelection({ profileList }) {
             <h3>Background</h3>
           </div>
           <div className="bps-body">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ullamcorper a lacus vestibulum sed arcu non odio euismod lacinia.
-              Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.
+            <p className="background">
+              {profileList[currentSlide].background}
             </p>
           </div>
         </div>
@@ -104,7 +101,9 @@ function ProfileSelection({ profileList }) {
             <h3>Spoken language</h3>
           </div>
           <div className="bps-body">
-            <p>English, and French</p>
+            <p>
+              {normaliseArrayToSentence(profileList[currentSlide].language)}
+            </p>
           </div>
 
         </div>
@@ -113,25 +112,19 @@ function ProfileSelection({ profileList }) {
             <h3>Education</h3>
           </div>
           <div className="bps-body">
-            <div className="education-item">
-              <div className="ei-info">
-                <h4>University of Melbourne</h4>
-                <p>Bachelor of Law</p>
-              </div>
-              <div className="ei-date">
-                <p>2020</p>
-              </div>
-            </div>
-            <div className="education-item">
-              <div className="ei-info">
-                <h4>University of Sydney</h4>
-                <p>Bachelor of Science (Sociology)</p>
-              </div>
-              <div className="ei-date">
-                <p>2016</p>
-              </div>
-            </div>
-
+            {
+              profileList[currentSlide].education.map(({ school, degree, year }) => (
+                <div className="education-item">
+                  <div className="ei-info">
+                    <h4>{school}</h4>
+                    <p>{degree}</p>
+                  </div>
+                  <div className="ei-date">
+                    <p>{year}</p>
+                  </div>
+                </div>
+              ))
+            }
           </div>
         </div>
 
@@ -140,7 +133,7 @@ function ProfileSelection({ profileList }) {
             <h3>Contact</h3>
           </div>
           <div className="bps-body">
-            <a href="tel:02-9876-5432">(02) 9876 5432</a>
+            <a href={`tel:${sanitisePhoneNumber(profileList[currentSlide].contactNumber)}`}>{profileList[currentSlide].contactNumber}</a>
           </div>
         </div>
 
@@ -151,7 +144,7 @@ function ProfileSelection({ profileList }) {
           <div className="bps-body">
             <table>
               {
-                schedule.map(({ day, time }) => (
+                profileList[currentSlide].schedule.map(({ day, time }) => (
                   <tr>
                     <td>
                       <p>{day}</p>
