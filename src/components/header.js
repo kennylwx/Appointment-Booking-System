@@ -5,10 +5,12 @@ function Header() {
   return (
     <header className="header">
       <div className="left-items">
-        SUITS | Booking System
+        <h1>
+          SUITS | Booking System
+        </h1>
       </div>
       <div className="right-items">
-        Home
+        {/* Home */}
       </div>
     </header>
   );

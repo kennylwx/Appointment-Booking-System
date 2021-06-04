@@ -16,10 +16,6 @@ function Container() {
       </div>
       <div className="container-body">
         <Item />
-        <Item />
-
-        <Item />
-
       </div>
       <div className="container-footer">
         You have chosen Kenny

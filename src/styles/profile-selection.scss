@@ -1,0 +1,134 @@
+@import "./global.scss";
+
+.slider-container {
+  padding: 12px 0;
+
+  .slider-item {
+    // background-color: green;
+
+    .profile {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      // background-color: orange;
+      height: 100%;
+      width: 80%;
+      margin: 0 auto;
+      padding: 0 12px;
+
+      // border: 1px solid $border-color;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      .profile-img {
+        height: 45px;
+        width: 45px;
+        object-fit: cover;
+        @include border-radius(50%);
+      }
+
+      .profile-info {
+        margin-left: 12px;
+        flex: 1;
+
+        .profile-name {
+          margin: 0;
+          font-weight: 500;
+          color: #2b1a00;
+        }
+
+        .profile-title {
+          margin: 0;
+          font-weight: 400;
+          color: #3f2701;
+        }
+      }
+    }
+  }
+}
+
+.carousel-container {
+  position: relative;
+  margin: auto;
+}
+
+.left {
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+.right {
+  svg {
+    transform: rotate(-90deg);
+  }
+}
+
+.circle {
+  width: 32px;
+  height: 32px;
+  @include border-radius(50%);
+
+  border: none;
+  background: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    height: 16px;
+    width: 16px;
+
+    path {
+      fill: #583700;
+    }
+  }
+}
+
+.circle:disabled {
+  cursor: default;
+
+  svg {
+    path {
+      fill: #dfdfdf;
+    }
+  }
+}
+
+.button-back {
+  position: absolute;
+  top: 50%;
+  left: -15px;
+  transform: translateY(-50%);
+
+  @extend .circle;
+}
+
+.button-next {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+  @extend .circle;
+}
+
+.carousel__back-button:disabled {
+}
+
+.dot-group {
+  text-align: center;
+
+  .carousel__dot {
+    margin-right: 2px;
+    border: none;
+    height: 4px !important;
+    background-color: rgb(230, 230, 230);
+  }
+
+  .carousel__dot--selected {
+    height: 4px !important;
+    background-color: #694100;
+    @include border-radius(1px);
+  }
+}

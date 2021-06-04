@@ -1,7 +1,6 @@
 @import "./global.scss";
 
 .item {
-  // background-color: orange;
   padding: 25px 30px;
   border-bottom: 1px solid $border-color;
 
@@ -35,40 +34,5 @@
   }
 
   .item-body {
-  }
-}
-
-.profile-selection {
-  display: flex;
-  background-color: orange;
-  overflow-x: scroll;
-}
-
-.profile {
-  display: flex;
-  border: 1px solid $border-color;
-  min-width: 200px;
-
-  .profile-img {
-    height: 45px;
-    width: 45px;
-    object-fit: cover;
-    @include border-radius(50%);
-  }
-
-  .profile-info {
-    margin-left: 12px;
-
-    .profile-title {
-      margin: 0;
-      font-weight: 500;
-      color: $body-title-color;
-    }
-
-    .profile-name {
-      margin: 0;
-      font-weight: 500;
-      color: $body-title-color;
-    }
   }
 }
