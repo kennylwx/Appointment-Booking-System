@@ -119,7 +119,7 @@ function ProfileSelection({ profileList }) {
                     <h4>{school}</h4>
                     <p>{degree}</p>
                   </div>
-                  <div className="ei-date">
+                  <div className="ei-date" style={{ fontWeight: '600' }}>
                     <p>{year}</p>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ function ProfileSelection({ profileList }) {
                       <p>{day}</p>
                     </td>
                     <td>
-                      <p>{time}</p>
+                      <p style={{ fontWeight: '600' }}>{time}</p>
                     </td>
                   </tr>
                 ))
@@ -170,7 +170,12 @@ function ProfileSelection({ profileList }) {
                   <p>Consultation (30min)</p>
                 </td>
                 <td>
-                  <p>$220</p>
+                  <p
+                    className="price"
+                    style={{ fontWeight: '600' }}
+                  >
+                    {`$${profileList[currentSlide].priceFor30min}`}
+                  </p>
                 </td>
               </tr>
             </table>

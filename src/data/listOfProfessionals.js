@@ -57,7 +57,7 @@ const listOfProfessionals = [
     title: 'Clinical Negligence Lawyer',
     img: ProfileImage2,
     contactNumber: '(02) 6667 5472',
-    priceFor30min: 220,
+    priceFor30min: 170,
     background: 'Graduating with honours, and receiving the Grand McArthur prize during her final year, served as a testament of Nikky\'s bright future in her career in law. As she was only out of school for 3 years, when she found herself part of the legal team that mounted a class action law suit against the federal government for negligence in the construction of the abysinth statue, a case that semented her mark in the industry.',
     language: ['English', 'Mandarin'],
     education: [
@@ -100,7 +100,7 @@ const listOfProfessionals = [
     title: 'Criminal Lawyer',
     img: ProfileImage3,
     contactNumber: '(02) 9999 7777',
-    priceFor30min: 220,
+    priceFor30min: 180,
     background: 'Rowdy is a criminal law specialist. After spending his years working with the police department, he has turned his passion into a career. Not only did he finish his law degree at the near top of his class, he also pursued a Master in Criminology, and is currently working towards his doctorate.',
     language: ['English', 'Spanish'],
     education: [

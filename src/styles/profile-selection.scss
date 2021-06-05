@@ -10,7 +10,6 @@ $section-title-color: #3f2e15;
 $section-body-color: #2f1f01;
 
 $section-h4-color: #a8771a;
-$section-h5-color: #2f1f01;
 
 .slider-container {
   padding: 12px 0;
@@ -187,10 +186,6 @@ $section-h5-color: #2f1f01;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-
-        .ei-date {
-          font-weight: 600;
-        }
       }
 
       table {
@@ -200,9 +195,6 @@ $section-h5-color: #2f1f01;
         tr td:nth-child(2) {
           text-align: right;
         }
-      }
-
-      .contact {
       }
     }
   }

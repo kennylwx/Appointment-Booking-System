@@ -1,0 +1,29 @@
+@import "./global.scss";
+
+$section-h5-color: #5f471b;
+
+.booking-selection {
+  .bs-header {
+    border: 1px solid $border-color;
+    padding: 10px 12px;
+    @include border-radius(4px);
+    margin-bottom: 8px;
+
+    h5 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 13px;
+      color: $section-h5-color;
+    }
+  }
+
+  .bs-body {
+    .bsb-calendar-picker {
+      width: 100%;
+
+      th {
+        background-color: orange;
+      }
+    }
+  }
+}

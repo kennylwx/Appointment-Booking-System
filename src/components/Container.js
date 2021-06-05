@@ -3,6 +3,7 @@ import '../styles/container.scss';
 import Item from './Item';
 import { listOfProfessionals } from '../data';
 import ProfileSelection from './ProfileSelection';
+import BookingSelection from './BookingSelection';
 
 function Container() {
   return (
@@ -31,6 +32,7 @@ function Container() {
           number={2}
           title="Pick an appointment time"
           profileList={listOfProfessionals}
+          body={<BookingSelection />}
         />
         <Item
           number={3}
