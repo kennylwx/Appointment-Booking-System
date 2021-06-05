@@ -1,13 +1,24 @@
 @import "./global.scss";
 
-$section-h5-color: #5f471b;
+$section-h5-color: #a8771a;
+$button-color: #775311;
+$button-bg-color: #fff4e1;
+
+$calendar-nav-label: #201607;
+$calendar-weekday-label: #201607;
+$calendar-day-inactive-label: #d3d3d3;
+$calendar-day-active-label: #201607;
 
 .booking-selection {
   .bs-header {
     border: 1px solid $border-color;
-    padding: 10px 12px;
+    padding: 4px 8px 4px 14px;
     @include border-radius(4px);
     margin-bottom: 8px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     h5 {
       margin: 0;
@@ -15,14 +26,188 @@ $section-h5-color: #5f471b;
       font-size: 13px;
       color: $section-h5-color;
     }
+
+    .calendar-button {
+      @include border-radius(4px);
+
+      cursor: pointer;
+      border: none;
+      background: none;
+
+      height: 28px;
+      width: 28px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+
+        path {
+          fill: $button-color;
+        }
+      }
+    }
+
+    .calendar-button:hover {
+      background-color: $button-bg-color;
+    }
   }
 
   .bs-body {
-    .bsb-calendar-picker {
-      width: 100%;
+    position: relative;
+  }
+}
 
-      th {
-        background-color: orange;
+.calendar-selector {
+  position: absolute;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+    rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  @include border-radius(4px);
+  padding: 10px;
+
+  // Navigation
+  .react-calendar__navigation {
+    height: 32px;
+
+    // Arrows
+    .react-calendar__navigation__arrow {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      svg {
+        height: 100%;
+        width: 16px;
+
+        path {
+          fill: $action-active-color;
+        }
+      }
+    }
+
+    .react-calendar__navigation__arrow:disabled {
+      cursor: default;
+
+      svg {
+        path {
+          fill: $action-inactive-color;
+        }
+      }
+    }
+
+    // Next Arrows
+    .react-calendar__navigation__next-button {
+      svg {
+        transform: rotate(-90deg);
+      }
+    }
+
+    // Prev Arrows
+    .react-calendar__navigation__prev-button {
+      svg {
+        transform: rotate(90deg);
+      }
+    }
+
+    // Label (July 2021)
+    .react-calendar__navigation__label {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      color: $calendar-nav-label;
+      font-weight: 600;
+    }
+
+    .react-calendar__navigation__label:disabled {
+      cursor: default;
+    }
+  }
+
+  .react-calendar__viewContainer {
+    .react-calendar__month-view__weekdays {
+      margin: 8px 0 6px;
+
+      .react-calendar__month-view__weekdays__weekday {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        abbr[title] {
+          // remove underline for abbr
+          border-bottom: none !important;
+          cursor: inherit !important;
+          text-decoration: none !important;
+
+          font-size: 13px;
+          color: $calendar-weekday-label;
+        }
+      }
+    }
+
+    .react-calendar__month-view__days {
+      .react-calendar__month-view__days__day {
+        background: none;
+        border: none;
+        cursor: pointer;
+
+        @include border-radius(4px);
+
+        color: $calendar-day-active-label;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        abbr {
+          font-size: 13px;
+          margin: 10px 0 2px;
+          pointer-events: none;
+        }
+
+        .high-availability {
+          background-color: green;
+        }
+
+        .medium-availability {
+          background-color: yellow;
+        }
+
+        .low-availability {
+          background-color: red;
+        }
+
+        .availability-label {
+          height: 4px;
+          width: 4px;
+          @include border-radius(50%);
+          pointer-events: none;
+          margin-bottom: 6px;
+        }
+      }
+
+      .react-calendar__month-view__days__day:disabled {
+        color: $calendar-day-inactive-label;
+        cursor: default;
+      }
+
+      // .react-calendar__month-view__days__day:active {
+      //   background-color: blue;
+      // }
+
+      .react-calendar__month-view__days__day[disabled]:hover {
+        background-color: white;
+      }
+
+      .react-calendar__month-view__days__day:hover {
+        background-color: rgba(212, 212, 212, 0.363);
       }
     }
   }

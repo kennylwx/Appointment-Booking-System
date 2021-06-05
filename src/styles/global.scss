@@ -6,6 +6,9 @@ $header-title-color: #563a12;
 $body-background-color: white;
 $body-title-color: #4f3b1c;
 
+$action-active-color: #583700;
+$action-inactive-color: #dfdfdf;
+
 @mixin box-shadow($left, $top, $radius, $color) {
   box-shadow: $left $top $radius $color;
   -webkit-box-shadow: $left $top $radius $color;
