@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/container.scss';
 import Item from './Item';
 import { listOfProfessionals } from '../data';
@@ -6,6 +6,12 @@ import ProfileSelection from './ProfileSelection';
 import BookingSelection from './BookingSelection';
 
 function Container() {
+  const [selectedProfile, setSelectedProfile] = useState(listOfProfessionals[0]);
+
+  const updateSelectedProfile = (profile) => {
+    setSelectedProfile(profile);
+  };
+
   return (
     <div className="container">
       <div className="container-header">
@@ -25,14 +31,21 @@ function Container() {
           body={(
             <ProfileSelection
               profileList={listOfProfessionals}
+              updateSelectedProfile={updateSelectedProfile}
+              selectedProfile={selectedProfile}
             />
           )}
         />
         <Item
           number={2}
           title="Pick an appointment time"
-          profileList={listOfProfessionals}
-          body={<BookingSelection />}
+          body={(
+            <BookingSelection
+              profileList={listOfProfessionals}
+              updateSelectedProfile={updateSelectedProfile}
+              selectedProfile={selectedProfile}
+            />
+          )}
         />
         <Item
           number={3}

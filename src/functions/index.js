@@ -3,3 +3,7 @@ export { default as sanitisePhoneNumber } from './sanitisePhoneNumber';
 export { default as addMonthsToDate } from './addMonthsToDate';
 export { default as getListOfDates } from './getListOfDates';
 export { default as normaliseDateToReadableString } from './normaliseDateToReadableString';
+export { default as get24HrsFrmAMPM } from './get24HrsFrmAMPM';
+export { default as isObjectDateEqualToStringDate } from './isObjectDateEqualToStringDate';
+export { default as getHourFromString } from './getHourFromString';
+export { default as getMinuteFromString } from './getMinuteFromString';

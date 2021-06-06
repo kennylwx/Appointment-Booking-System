@@ -1,28 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, DotGroup,
 } from 'pure-react-carousel';
 
 import { listOfProfessionals } from '../data';
-// eslint-disable-next-line no-unused-vars
-import { normaliseArrayToSentence, sanitisePhoneNumber } from '../functions';
+import {
+  normaliseArrayToSentence,
+  sanitisePhoneNumber,
+} from '../functions';
 
 import { ReactComponent as Arrow } from '../assets/icon/arrow.svg';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import '../styles/profile-selection.scss';
 
-function ProfileSelection({ profileList }) {
+function ProfileSelection({
+  profileList,
+  updateSelectedProfile,
+  selectedProfile,
+}) {
   const INITIAL_SLIDE = 0;
   const [currentSlide, setCurrentSlide] = useState(INITIAL_SLIDE);
+
+  useEffect(() => {
+    updateSelectedProfile(profileList[INITIAL_SLIDE]);
+  }, []);
+
   const onButtonBack = () => {
     setCurrentSlide(currentSlide - 1);
+    updateSelectedProfile(profileList[currentSlide - 1]);
   };
 
   const onButtonNext = () => {
     setCurrentSlide(currentSlide + 1);
+    updateSelectedProfile(profileList[currentSlide + 1]);
   };
+
+  // const getCurrentProfile = (id, list) => {
+  //   for (let i = 0; i < list.length; i += 1) {
+  //     if (list[i].id === id) {
+  //       return list[i];
+  //     }
+  //   }
+
+  //   return '';
+  // };
 
   return (
     <>
@@ -49,7 +72,6 @@ function ProfileSelection({ profileList }) {
                 className="slider-item"
                 index={index}
               >
-
                 <div className="profile">
                   <img className="profile-img" src={img} alt={`${name}-profile`} />
                   <div className="profile-info">
@@ -92,7 +114,7 @@ function ProfileSelection({ profileList }) {
           </div>
           <div className="bps-body">
             <p className="background">
-              {profileList[currentSlide].background}
+              {selectedProfile.background}
             </p>
           </div>
         </div>
@@ -102,7 +124,7 @@ function ProfileSelection({ profileList }) {
           </div>
           <div className="bps-body">
             <p>
-              {normaliseArrayToSentence(profileList[currentSlide].language)}
+              {normaliseArrayToSentence(selectedProfile.language)}
             </p>
           </div>
 
@@ -113,13 +135,13 @@ function ProfileSelection({ profileList }) {
           </div>
           <div className="bps-body">
             {
-              profileList[currentSlide].education.map(({ school, degree, year }) => (
+              selectedProfile.education.map(({ school, degree, year }) => (
                 <div className="education-item">
                   <div className="ei-info">
                     <h4>{school}</h4>
                     <p>{degree}</p>
                   </div>
-                  <div className="ei-date" style={{ fontWeight: '600' }}>
+                  <div className="ei-date">
                     <p>{year}</p>
                   </div>
                 </div>
@@ -133,7 +155,7 @@ function ProfileSelection({ profileList }) {
             <h3>Contact</h3>
           </div>
           <div className="bps-body">
-            <a href={`tel:${sanitisePhoneNumber(profileList[currentSlide].contactNumber)}`}>{profileList[currentSlide].contactNumber}</a>
+            <a href={`tel:${sanitisePhoneNumber(selectedProfile.contactNumber)}`}>{profileList[currentSlide].contactNumber}</a>
           </div>
         </div>
 
@@ -144,13 +166,18 @@ function ProfileSelection({ profileList }) {
           <div className="bps-body">
             <table>
               {
-                profileList[currentSlide].schedule.map(({ day, time }) => (
+                selectedProfile.schedule.map(({ day, startTime, endTime }) => (
                   <tr>
                     <td>
                       <p>{day}</p>
                     </td>
                     <td>
-                      <p style={{ fontWeight: '600' }}>{time}</p>
+                      <p>
+                        {`
+                          ${startTime} - 
+                          ${endTime}
+                        `}
+                      </p>
                     </td>
                   </tr>
                 ))
@@ -172,9 +199,8 @@ function ProfileSelection({ profileList }) {
                 <td>
                   <p
                     className="price"
-                    style={{ fontWeight: '600' }}
                   >
-                    {`$${profileList[currentSlide].priceFor30min}`}
+                    {`$${selectedProfile.priceFor30min}`}
                   </p>
                 </td>
               </tr>
@@ -196,4 +222,6 @@ ProfileSelection.defaultProps = {
 
 ProfileSelection.propTypes = {
   profileList: PropTypes.arrayOf(PropTypes.object),
+  updateSelectedProfile: PropTypes.func.isRequired,
+  selectedProfile: PropTypes.number.isRequired,
 };

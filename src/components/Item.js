@@ -15,7 +15,6 @@ function Item({ number, title, body }) {
       </div>
 
       <div className="item-body">
-
         {body}
       </div>
     </div>

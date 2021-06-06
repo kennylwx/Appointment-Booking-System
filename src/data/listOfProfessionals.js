@@ -27,27 +27,33 @@ const listOfProfessionals = [
     schedule: [
       {
         day: 'Monday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Tuesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Wednesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Thursday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Friday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Saturday',
-        time: '8AM - 12PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
     ],
   },
@@ -70,27 +76,33 @@ const listOfProfessionals = [
     schedule: [
       {
         day: 'Monday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Tuesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Wednesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Thursday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Friday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Saturday',
-        time: '8AM - 12PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
     ],
   },
@@ -118,27 +130,33 @@ const listOfProfessionals = [
     schedule: [
       {
         day: 'Monday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Tuesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Wednesday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Thursday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Friday',
-        time: '9AM - 5PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
       {
         day: 'Saturday',
-        time: '8AM - 12PM',
+        startTime: '9:00 AM',
+        endTime: '5:00 PM',
       },
     ],
   },

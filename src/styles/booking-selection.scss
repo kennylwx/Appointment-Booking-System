@@ -120,6 +120,7 @@ $calendar-day-active-label: #201607;
       background: none;
       border: none;
       cursor: pointer;
+      pointer-events: none;
 
       color: $calendar-nav-label;
       font-weight: 600;
@@ -196,11 +197,19 @@ $calendar-day-active-label: #201607;
       .react-calendar__month-view__days__day:disabled {
         color: $calendar-day-inactive-label;
         cursor: default;
-      }
 
-      // .react-calendar__month-view__days__day:active {
-      //   background-color: blue;
-      // }
+        .high-availability {
+          background-color: white;
+        }
+
+        .medium-availability {
+          background-color: white;
+        }
+
+        .low-availability {
+          background-color: white;
+        }
+      }
 
       .react-calendar__month-view__days__day[disabled]:hover {
         background-color: white;
@@ -210,5 +219,75 @@ $calendar-day-active-label: #201607;
         background-color: rgba(212, 212, 212, 0.363);
       }
     }
+  }
+}
+
+.time-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  margin: 8px 0;
+
+  .time-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-weight: 500;
+    font-size: 13px;
+    margin: 0;
+    color: $button-color;
+
+    padding: 8px 6px;
+    margin-right: 6px;
+    @include border-radius(2px);
+  }
+
+  .time-button:hover {
+    background-color: $button-bg-color;
+  }
+}
+
+$response-title-color: rgb(75, 72, 72);
+
+.selection-success {
+  background-color: rgba(172, 255, 139, 0.411);
+  border-left: 5px solid rgb(27, 158, 27);
+  padding: 6px 12px;
+
+  h4 {
+    color: $response-title-color;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h5 {
+    color: $response-title-color;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.selection-default {
+  background-color: rgba(228, 228, 228, 0.411);
+  border-left: 5px solid rgb(121, 121, 121);
+  padding: 6px 12px;
+
+  h4 {
+    color: $response-title-color;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h5 {
+    color: $response-title-color;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 500;
   }
 }
