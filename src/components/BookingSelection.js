@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
 import '../styles/booking-selection.scss';
 import {
   addMonthsToDate,
-  // getListOfDates,
   normaliseDateToReadableString,
   get24HrsFrmAMPM,
   getHourFromString,
@@ -50,8 +48,6 @@ function BookingSelection({
       getHourFromString(get24HrsFrmAMPM(ev.target.ariaLabel)), // hour
       getMinuteFromString(get24HrsFrmAMPM(ev.target.ariaLabel)), // minute
     ));
-
-    console.log(listOfAppointments);
   };
 
   const onCalendarDisplay = () => {
@@ -75,11 +71,8 @@ function BookingSelection({
         if (val.getFullYear() === tempDate.getFullYear()
         && val.getMonth() === tempDate.getMonth()
         && val.getDate() === tempDate.getDate()) {
-          const hour = tempDate.getHours();
-
+          const hour = tempDate.getHours() < 10 ? `0${tempDate.getHours()}` : tempDate.getHours();
           const minute = tempDate.getMinutes() === 0 ? '00' : tempDate.getMinutes();
-          console.log(minute);
-
           listOfUnavailableTimes.push(`${hour}:${minute}`);
         }
       }
@@ -102,6 +95,10 @@ function BookingSelection({
       // eslint-disable-next-line max-len
       const listOfAvailableTimes = listOfAllTimes.filter((el) => listOfUnavailableTimes.indexOf(el) < 0);
       setTimeDisplay(listOfAvailableTimes);
+
+      // console.log(listOfAllTimes);
+      // console.log(listOfUnavailableTimes);
+      // console.log(listOfAvailableTimes);
     }
   };
 
@@ -185,10 +182,10 @@ function BookingSelection({
                 <button
                   type="button"
                   className="time-button"
-                  aria-label={time}
+                  aria-label={getAMPMFrm24Hrs(time)}
                   onClick={(event) => { onTimeSelect(event); }}
                 >
-                  {time}
+                  { getAMPMFrm24Hrs(time) }
                 </button>
               ))
               : ''
@@ -196,7 +193,7 @@ function BookingSelection({
           }
         </div>
 
-        {renderTimeResponseDisplay()}
+        { renderTimeResponseDisplay() }
 
       </div>
     </div>

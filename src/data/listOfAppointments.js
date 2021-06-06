@@ -71,6 +71,18 @@ const listOfAppointments = [
     purpose: 'General consult',
     dateTime: '2021-06-11T06:30:00.000Z',
   },
+  {
+    appointmentId: 7,
+    hostId: 1,
+    inviteeInfo: {
+      firstName: 'Kenny',
+      lastName: 'Lee',
+      email: 'kenny@email.com',
+      phoneNumber: '0422032123',
+    },
+    purpose: 'General consult',
+    dateTime: '2021-06-10T23:30:00.000Z',
+  },
 
 ];
 

@@ -223,11 +223,13 @@ $calendar-day-active-label: #201607;
 }
 
 .time-selector {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: flex-start;
+  // flex-wrap: wrap;
 
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: 8px 0;
 
   .time-button {
@@ -241,7 +243,7 @@ $calendar-day-active-label: #201607;
     color: $button-color;
 
     padding: 8px 6px;
-    margin-right: 6px;
+    // margin-right: 6px;
     @include border-radius(2px);
   }
 

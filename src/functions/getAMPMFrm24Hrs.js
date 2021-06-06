@@ -4,7 +4,7 @@ const getAMPMFrm24Hrs = (time) => {
 
   if (tTime.length > 1) { // If time format correct
     const ttTime = tTime.slice(1); // Remove full string match value
-    ttTime[5] = +ttTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+    ttTime[5] = +ttTime[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
     ttTime[0] = +ttTime[0] % 12 || 12; // Adjust hours
     return ttTime.join('');
   }

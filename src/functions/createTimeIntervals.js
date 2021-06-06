@@ -4,7 +4,7 @@ const createTimeIntervals = (startTime, endTime, step) => {
   const arr = [];
   for (let k = startTime; k < endTime; k += 1) {
     for (let j = 0; j < (MIN / step); j += 1) {
-      arr.push(`${k}:${j === 0 ? '00' : step * j}`);
+      arr.push(`${k < 10 ? `0${k}` : k}:${j === 0 ? '00' : step * j}`);
     }
   }
 
