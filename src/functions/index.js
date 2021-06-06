@@ -7,3 +7,5 @@ export { default as get24HrsFrmAMPM } from './get24HrsFrmAMPM';
 export { default as isObjectDateEqualToStringDate } from './isObjectDateEqualToStringDate';
 export { default as getHourFromString } from './getHourFromString';
 export { default as getMinuteFromString } from './getMinuteFromString';
+export { default as createTimeIntervals } from './createTimeIntervals';
+export { default as getAMPMFrm24Hrs } from './getAMPMFrm24Hrs';

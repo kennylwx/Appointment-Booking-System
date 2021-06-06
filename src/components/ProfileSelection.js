@@ -37,16 +37,6 @@ function ProfileSelection({
     updateSelectedProfile(profileList[currentSlide + 1]);
   };
 
-  // const getCurrentProfile = (id, list) => {
-  //   for (let i = 0; i < list.length; i += 1) {
-  //     if (list[i].id === id) {
-  //       return list[i];
-  //     }
-  //   }
-
-  //   return '';
-  // };
-
   return (
     <>
       <CarouselProvider

@@ -53,7 +53,7 @@ const listOfProfessionals = [
       {
         day: 'Saturday',
         startTime: '9:00 AM',
-        endTime: '5:00 PM',
+        endTime: '12:00 PM',
       },
     ],
   },

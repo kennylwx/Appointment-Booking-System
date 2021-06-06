@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
@@ -9,16 +10,22 @@ import {
   get24HrsFrmAMPM,
   getHourFromString,
   getMinuteFromString,
+  createTimeIntervals,
+  getAMPMFrm24Hrs,
 } from '../functions';
-import { listOfProfessionals, listOfAppointments } from '../data';
+import {
+  listOfAppointments,
+  listOfDays,
+} from '../data';
 import { ReactComponent as CalendarIcon } from '../assets/icon/calendar.svg';
 import { ReactComponent as ArrowIcon } from '../assets/icon/arrow.svg';
 
-// eslint-disable-next-line no-unused-vars
-function BookingSelection({ profileList, updateSelectedProfile, selectedProfile }) {
+function BookingSelection({
+  selectedProfile,
+}) {
   const [selectedTime, setSelectedTime] = useState('');
-  const [timeDisplay, setTimeDisplay] = useState('');
-  const [selectedCalendarDate, setSelectedCalendarDate] = useState('');
+  const [timeDisplay, setTimeDisplay] = useState([]);
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState(new Date());
   const [calendarDisplay, setCalendarDisplay] = useState(false);
 
   const BOOKING_DURATION_MONTHS = 2;
@@ -59,21 +66,48 @@ function BookingSelection({ profileList, updateSelectedProfile, selectedProfile 
     // Close the calendar display
     onCalendarDisplay();
 
-    // Display time available on that day
-    setTimeDisplay();
+    // Get unavailable times for selected profile on selected date
+    const listOfUnavailableTimes = [];
+    for (let i = 0; i < listOfAppointments.length; i += 1) {
+      const tempDate = new Date(listOfAppointments[i].dateTime);
 
-    // for (let i = 0; i < listOfAppointments.length; i += 1) {
-    //   const tempDate = new Date(listOfAppointments[i].dateTime);
-    //   // if(tempDate.get ){
-    //   profileList;
-    //   // }
-    //   console.log(tempDate);
-    // }
+      if (listOfAppointments[i].hostId === selectedProfile.id) {
+        if (val.getFullYear() === tempDate.getFullYear()
+        && val.getMonth() === tempDate.getMonth()
+        && val.getDate() === tempDate.getDate()) {
+          const hour = tempDate.getHours();
+
+          const minute = tempDate.getMinutes() === 0 ? '00' : tempDate.getMinutes();
+          console.log(minute);
+
+          listOfUnavailableTimes.push(`${hour}:${minute}`);
+        }
+      }
+    }
+
+    // Get all times available base on schedule
+    let daySchedule = null;
+    for (let k = 0; k < selectedProfile.schedule.length; k += 1) {
+      if (selectedProfile.schedule[k].day === listOfDays[val.getDay()]) {
+        daySchedule = selectedProfile.schedule[k];
+      }
+    }
+
+    if (daySchedule) {
+      const startingHour = parseInt(getHourFromString(get24HrsFrmAMPM(daySchedule.startTime)), 10);
+      const endingHour = parseInt(getHourFromString(get24HrsFrmAMPM(daySchedule.endTime)), 10);
+      const interval = 30;
+
+      const listOfAllTimes = createTimeIntervals(startingHour, endingHour, interval);
+      // eslint-disable-next-line max-len
+      const listOfAvailableTimes = listOfAllTimes.filter((el) => listOfUnavailableTimes.indexOf(el) < 0);
+      setTimeDisplay(listOfAvailableTimes);
+    }
   };
 
   const renderCalendarTileContent = (_activeStartDate, date, view) => (view === 'month' && date.getDay() === 0 ? <span className="availability-label high-availability" /> : <span className="availability-label" />);
 
-  const renderTimeDisplay = () => {
+  const renderTimeResponseDisplay = () => {
     if (selectedTime) {
       return (
         <div className="selection-success">
@@ -162,7 +196,7 @@ function BookingSelection({ profileList, updateSelectedProfile, selectedProfile 
           }
         </div>
 
-        {renderTimeDisplay()}
+        {renderTimeResponseDisplay()}
 
       </div>
     </div>
@@ -171,13 +205,7 @@ function BookingSelection({ profileList, updateSelectedProfile, selectedProfile 
 
 export default BookingSelection;
 
-BookingSelection.defaultProps = {
-  profileList: listOfProfessionals,
-};
-
 BookingSelection.propTypes = {
-  profileList: PropTypes.arrayOf(PropTypes.object),
-  updateSelectedProfile: PropTypes.func.isRequired,
   selectedProfile: PropTypes.number.isRequired,
 
 };
