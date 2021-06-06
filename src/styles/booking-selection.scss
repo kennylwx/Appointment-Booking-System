@@ -1,7 +1,7 @@
 @import "./global.scss";
 
 $section-h5-color: #a8771a;
-$button-color: #775311;
+$button-color: #694809;
 $button-bg-color: #fff4e1;
 
 $calendar-nav-label: #201607;
@@ -238,12 +238,11 @@ $calendar-day-active-label: #201607;
     cursor: pointer;
 
     font-weight: 500;
-    font-size: 13px;
+    font-size: 12px;
     margin: 0;
     color: $button-color;
 
     padding: 8px 6px;
-    // margin-right: 6px;
     @include border-radius(2px);
   }
 
@@ -255,8 +254,8 @@ $calendar-day-active-label: #201607;
 $response-title-color: rgb(75, 72, 72);
 
 .selection-success {
-  background-color: rgba(172, 255, 139, 0.411);
-  border-left: 5px solid rgb(27, 158, 27);
+  background-color: rgba(179, 255, 148, 0.404);
+  border-left: 5px solid rgba(5, 148, 5, 0.582);
   padding: 6px 12px;
 
   h4 {

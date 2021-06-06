@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Calendar from 'react-calendar';
 import '../styles/booking-selection.scss';
@@ -14,6 +14,7 @@ import {
 import {
   listOfAppointments,
   listOfDays,
+  listOfMonths,
 } from '../data';
 import { ReactComponent as CalendarIcon } from '../assets/icon/calendar.svg';
 import { ReactComponent as ArrowIcon } from '../assets/icon/arrow.svg';
@@ -21,18 +22,14 @@ import { ReactComponent as ArrowIcon } from '../assets/icon/arrow.svg';
 function BookingSelection({
   selectedProfile,
 }) {
-  const [selectedTime, setSelectedTime] = useState('');
-  const [timeDisplay, setTimeDisplay] = useState([]);
-  const [selectedCalendarDate, setSelectedCalendarDate] = useState(new Date());
-  const [calendarDisplay, setCalendarDisplay] = useState(false);
-
   const BOOKING_DURATION_MONTHS = 2;
   const START_DATE = new Date();
   const END_DATE = addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS);
 
-  // useEffect(() => {
-  //   console.log(value);
-  // }, value);
+  const [selectedTime, setSelectedTime] = useState('');
+  const [timeDisplay, setTimeDisplay] = useState([]);
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState(START_DATE);
+  const [calendarDisplay, setCalendarDisplay] = useState(false);
 
   // const dates = getListOfDates(new Date(), addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS));
 
@@ -54,23 +51,16 @@ function BookingSelection({
     setCalendarDisplay(!calendarDisplay);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const onCalendarClick = (val, _eve) => {
-    // Save the calendar chosen date
-    setSelectedCalendarDate(val);
-
-    // Close the calendar display
-    onCalendarDisplay();
-
-    // Get unavailable times for selected profile on selected date
+  const getListOfAvailableTimes = (selectedDate) => {
+  // Get unavailable times for selected profile on selected date
     const listOfUnavailableTimes = [];
     for (let i = 0; i < listOfAppointments.length; i += 1) {
       const tempDate = new Date(listOfAppointments[i].dateTime);
 
       if (listOfAppointments[i].hostId === selectedProfile.id) {
-        if (val.getFullYear() === tempDate.getFullYear()
-        && val.getMonth() === tempDate.getMonth()
-        && val.getDate() === tempDate.getDate()) {
+        if (selectedDate.getFullYear() === tempDate.getFullYear()
+          && selectedDate.getMonth() === tempDate.getMonth()
+          && selectedDate.getDate() === tempDate.getDate()) {
           const hour = tempDate.getHours() < 10 ? `0${tempDate.getHours()}` : tempDate.getHours();
           const minute = tempDate.getMinutes() === 0 ? '00' : tempDate.getMinutes();
           listOfUnavailableTimes.push(`${hour}:${minute}`);
@@ -81,7 +71,7 @@ function BookingSelection({
     // Get all times available base on schedule
     let daySchedule = null;
     for (let k = 0; k < selectedProfile.schedule.length; k += 1) {
-      if (selectedProfile.schedule[k].day === listOfDays[val.getDay()]) {
+      if (selectedProfile.schedule[k].day === listOfDays[selectedDate.getDay()]) {
         daySchedule = selectedProfile.schedule[k];
       }
     }
@@ -94,22 +84,44 @@ function BookingSelection({
       const listOfAllTimes = createTimeIntervals(startingHour, endingHour, interval);
       // eslint-disable-next-line max-len
       const listOfAvailableTimes = listOfAllTimes.filter((el) => listOfUnavailableTimes.indexOf(el) < 0);
-      setTimeDisplay(listOfAvailableTimes);
 
-      // console.log(listOfAllTimes);
-      // console.log(listOfUnavailableTimes);
-      // console.log(listOfAvailableTimes);
+      return listOfAvailableTimes;
     }
+
+    return null;
+  };
+
+  useEffect(() => {
+    setTimeDisplay(getListOfAvailableTimes(START_DATE));
+  }, []);
+
+  // eslint-disable-next-line no-unused-vars
+  const onCalendarClick = (val, _eve) => {
+    // Save the calendar chosen date
+    setSelectedCalendarDate(val);
+
+    // Close the calendar display
+    onCalendarDisplay();
+
+    // get a list of available times for profile
+    setTimeDisplay(getListOfAvailableTimes(val));
   };
 
   const renderCalendarTileContent = (_activeStartDate, date, view) => (view === 'month' && date.getDay() === 0 ? <span className="availability-label high-availability" /> : <span className="availability-label" />);
 
   const renderTimeResponseDisplay = () => {
     if (selectedTime) {
+      const timeString = `
+      ${listOfDays[selectedTime.getDay()]}, 
+      ${selectedTime.getDate()} 
+      ${listOfMonths[selectedTime.getMonth()]} 
+      ${selectedTime.getFullYear()} at 
+      ${getAMPMFrm24Hrs(`${selectedTime.getHours() < 10 ? `0${selectedTime.getHours()}` : selectedTime.getHours()}:${selectedTime.getMinutes() === 0 ? '00' : selectedTime.getMinutes()}`)}`;
+
       return (
         <div className="selection-success">
           <h4>You have successfully selected </h4>
-          <h5>{selectedTime.toString()}</h5>
+          <h5>{timeString}</h5>
         </div>
       );
     }
@@ -118,7 +130,6 @@ function BookingSelection({
       return (
         <div className="selection-default">
           <h4>Please select a time</h4>
-          <h5>{selectedTime.toString()}</h5>
         </div>
       );
     }
