@@ -1,18 +1,5 @@
 @import "./global.scss";
 
-$section-h5-color: #a8771a;
-$button-color: #694809;
-$button-bg-color: #fff4e1;
-
-$calendar-nav-label: #201607;
-$calendar-weekday-label: #201607;
-$calendar-day-inactive-label: #d3d3d3;
-$calendar-day-active-label: #201607;
-
-$low-availability-color: #ee807f;
-$high-availability-color: #059705c0;
-$medium-availability-color: #ccaf0d;
-
 .booking-selection {
   .bs-header {
     border: 1px solid $border-color;
@@ -247,47 +234,5 @@ $medium-availability-color: #ccaf0d;
 
   .time-button:hover {
     background-color: $button-bg-color;
-  }
-}
-
-$response-title-color: rgb(75, 72, 72);
-
-.selection-success {
-  background-color: rgba(179, 255, 148, 0.404);
-  border-left: 5px solid rgba(5, 148, 5, 0.582);
-  padding: 6px 12px;
-
-  h4 {
-    color: $response-title-color;
-    font-size: 14px;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  h5 {
-    color: $response-title-color;
-    font-size: 13px;
-    margin: 0;
-    font-weight: 500;
-  }
-}
-
-.selection-default {
-  background-color: rgba(228, 228, 228, 0.411);
-  border-left: 5px solid rgb(121, 121, 121);
-  padding: 6px 12px;
-
-  h4 {
-    color: $response-title-color;
-    font-size: 14px;
-    margin: 0;
-    font-weight: 500;
-  }
-
-  h5 {
-    color: $response-title-color;
-    font-size: 13px;
-    margin: 0;
-    font-weight: 500;
   }
 }

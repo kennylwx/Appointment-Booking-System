@@ -1,1 +1,91 @@
 @import "./global.scss";
+
+.booking-submission {
+  .bs-header {
+  }
+
+  .bs-body {
+    .top-label {
+      // background-color: orange;
+      display: flex;
+      justify-content: space-between;
+      label {
+        width: 49%;
+      }
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      margin: 8px 0;
+
+      h3 {
+        margin: 0 0 4px;
+        font-size: 14px;
+        color: $section-title-color;
+      }
+
+      input {
+        border: 1px solid $border-color;
+        padding: 10px 8px;
+        @include border-radius(4px);
+
+        font-size: 13px;
+        color: $section-body-color;
+      }
+
+      input:disabled {
+        background-color: $response-background-default-color;
+      }
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      background-color: $header-background-color;
+      color: $header-title-color;
+      border: none;
+      padding: 10px 0;
+      margin: 12px 0;
+
+      @include border-radius(2px);
+
+      font-size: 13px;
+      font-weight: 500;
+
+      cursor: pointer;
+    }
+
+    input[type="submit"]:disabled {
+      background-color: $response-background-default-color;
+      color: rgb(194, 194, 194);
+      cursor: default;
+    }
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.submission-response-default {
+  background-color: $response-background-default-color;
+  border-left: 5px solid $response-default-color;
+  padding: 6px 12px;
+  margin: 12px 0;
+
+  h4 {
+    color: $response-title-color;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h5 {
+    color: $response-title-color;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 400;
+  }
+}

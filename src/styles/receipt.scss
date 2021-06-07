@@ -1,0 +1,70 @@
+@import "./global.scss";
+
+.receipt-view {
+  .receipt-body {
+    padding: 50px $side-padding;
+
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+  }
+}
+
+.receipt-appointment {
+  max-width: 420px;
+  width: 100%;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  @include border-radii(10px, 10px, 4px, 4px);
+
+  background-color: white;
+
+  .ra-header {
+    padding: 12px 20px;
+    background-color: $header-background-color;
+    @include border-radii(10px, 10px, 0, 0);
+
+    h3 {
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 2px;
+      color: $header-title-color;
+    }
+  }
+
+  .ra-body {
+    // background-color: blue;
+    padding: 12px 20px;
+
+    p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: $section-body-color;
+    }
+
+    h3 {
+      margin: 0 0 4px;
+      font-size: 14px;
+      color: $section-title-color;
+    }
+  }
+
+  .ra-footer {
+    padding: 0 20px 24px;
+
+    .return-button {
+      width: 100%;
+      background-color: $header-background-color;
+      color: $header-title-color;
+      border: none;
+      padding: 10px 0;
+      // margin: 12px 0;
+      @include border-radius(2px);
+
+      font-size: 13px;
+      font-weight: 500;
+
+      cursor: pointer;
+    }
+  }
+}

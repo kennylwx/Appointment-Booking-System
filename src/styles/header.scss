@@ -12,10 +12,13 @@
   justify-content: space-between;
 
   .left-items {
-    h1 {
+    .hero-button {
+      cursor: pointer;
       color: $body-title-color;
       font-size: 16px;
-      margin: 0;
+      font-weight: 600;
+
+      text-decoration: none;
     }
   }
 

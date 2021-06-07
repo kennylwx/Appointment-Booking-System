@@ -14,7 +14,6 @@ import {
 import {
   listOfAppointments,
   listOfDays,
-  listOfMonths,
   listOfBusySchedule,
 } from '../data';
 import { ReactComponent as CalendarIcon } from '../assets/icon/calendar.svg';
@@ -22,32 +21,27 @@ import { ReactComponent as ArrowIcon } from '../assets/icon/arrow.svg';
 
 function BookingSelection({
   selectedProfile,
+  updateSelectedTime,
+  selectedTime,
 }) {
   const BOOKING_DURATION_MONTHS = 2;
   const START_DATE = new Date();
   const END_DATE = addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS);
 
-  const [selectedTime, setSelectedTime] = useState('');
   const [timeDisplay, setTimeDisplay] = useState([]);
   const [selectedCalendarDate, setSelectedCalendarDate] = useState(START_DATE);
   const [calendarDisplay, setCalendarDisplay] = useState(false);
 
-  // reset when selectedProfile is changed
-  useEffect(() => {
-    setSelectedTime('');
-    setTimeDisplay([]);
-    setSelectedCalendarDate(START_DATE);
-    setCalendarDisplay(false);
-  }, [selectedProfile]);
-
   const onTimeSelect = (ev) => {
-    setSelectedTime(new Date(
-      selectedCalendarDate.getFullYear(), //  year
-      selectedCalendarDate.getMonth(), // month
-      selectedCalendarDate.getDate(), // date
-      getHourFromString(get24HrsFrmAMPM(ev.target.ariaLabel)), // hour
-      getMinuteFromString(get24HrsFrmAMPM(ev.target.ariaLabel)), // minute
-    ));
+    const tempDate = new Date(
+      selectedCalendarDate.getFullYear(),
+      selectedCalendarDate.getMonth(),
+      selectedCalendarDate.getDate(),
+      getHourFromString(get24HrsFrmAMPM(ev.target.ariaLabel)),
+      getMinuteFromString(get24HrsFrmAMPM(ev.target.ariaLabel)),
+    );
+
+    updateSelectedTime(tempDate);
   };
 
   const onCalendarDisplay = () => {
@@ -94,9 +88,13 @@ function BookingSelection({
     return null;
   };
 
+  // reset when selectedProfile is changed
   useEffect(() => {
+    updateSelectedTime('');
     setTimeDisplay(getListOfAvailableTimes(START_DATE));
-  }, []);
+    setSelectedCalendarDate(START_DATE);
+    setCalendarDisplay(false);
+  }, [selectedProfile]);
 
   // eslint-disable-next-line no-unused-vars
   const onCalendarClick = (val, _eve) => {
@@ -137,24 +135,30 @@ function BookingSelection({
   const renderTimeResponseDisplay = () => {
     if (selectedTime) {
       const timeString = `
-      ${listOfDays[selectedTime.getDay()]}, 
-      ${selectedTime.getDate()} 
-      ${listOfMonths[selectedTime.getMonth()]} 
-      ${selectedTime.getFullYear()} at 
+      ${normaliseDateToReadableString(selectedTime)} at 
       ${getAMPMFrm24Hrs(`${selectedTime.getHours() < 10 ? `0${selectedTime.getHours()}` : selectedTime.getHours()}:${selectedTime.getMinutes() === 0 ? '00' : selectedTime.getMinutes()}`)}`;
 
       return (
-        <div className="selection-success">
-          <h4>You have successfully selected </h4>
+        <div className="selection-response response-success">
+          <h4>
+            Appointment with
+            {' '}
+            {selectedProfile.name}
+          </h4>
           <h5>{timeString}</h5>
+          <h5>
+            Consultation (30min)
+            {' - $'}
+            {selectedProfile.priceFor30min}
+          </h5>
         </div>
       );
     }
 
     if (selectedCalendarDate) {
       return (
-        <div className="selection-default">
-          <h4>Please select a time</h4>
+        <div className="selection-response response-warning">
+          <h4>Please select a time!</h4>
         </div>
       );
     }
@@ -238,6 +242,26 @@ function BookingSelection({
 export default BookingSelection;
 
 BookingSelection.propTypes = {
-  selectedProfile: PropTypes.number.isRequired,
-
+  selectedProfile: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    title: PropTypes.string,
+    contactNumber: PropTypes.string,
+    img: PropTypes.string,
+    priceFor30min: PropTypes.number,
+    background: PropTypes.string,
+    language: PropTypes.arrayOf(PropTypes.string),
+    education: PropTypes.arrayOf(PropTypes.shape({
+      school: PropTypes.string,
+      degree: PropTypes.string,
+      year: PropTypes.string,
+    })),
+    schedule: PropTypes.arrayOf(PropTypes.shape({
+      day: PropTypes.string,
+      startTime: PropTypes.string,
+      endTime: PropTypes.string,
+    })),
+  }).isRequired,
+  updateSelectedTime: PropTypes.func.isRequired,
+  selectedTime: PropTypes.instanceOf(Date).isRequired,
 };

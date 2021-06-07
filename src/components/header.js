@@ -1,13 +1,17 @@
 import React from 'react';
 import '../styles/header.scss';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   return (
     <header className="header">
       <div className="left-items">
-        <h1>
+        <NavLink
+          to="/"
+          className="hero-button"
+        >
           SUITS | Booking System
-        </h1>
+        </NavLink>
       </div>
       <div className="right-items">
         {/* Home */}

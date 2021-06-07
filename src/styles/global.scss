@@ -9,6 +9,65 @@ $body-title-color: #4f3b1c;
 $action-active-color: #583700;
 $action-inactive-color: #dfdfdf;
 
+$section-title-color: #3f2e15;
+$section-body-color: #2f1f01;
+
+$response-title-color: rgb(75, 72, 72);
+$response-background-success-color: rgba(179, 255, 148, 0.404);
+$response-success-color: rgba(5, 148, 5, 0.582);
+$response-background-default-color: rgba(230, 230, 230, 0.822);
+$response-default-color: rgb(121, 121, 121);
+$response-background-warning-color: #fed80036;
+$response-warning-color: #fed900;
+
+$section-h5-color: #a8771a;
+$button-color: #694809;
+$button-bg-color: #fff4e1;
+
+$calendar-nav-label: #201607;
+$calendar-weekday-label: #201607;
+$calendar-day-inactive-label: #d3d3d3;
+$calendar-day-active-label: #201607;
+
+$low-availability-color: #ee807f;
+$high-availability-color: #059705c0;
+$medium-availability-color: #ccaf0d;
+
+$profile-title: #201607;
+$profile-desc: #271c0a;
+
+$section-h4-color: #a8771a;
+
+.selection-response {
+  background-color: $response-background-default-color;
+  border-left: 5px solid $response-default-color;
+  padding: 6px 12px;
+
+  h4 {
+    color: $response-title-color;
+    font-size: 14px;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  h5 {
+    color: $response-title-color;
+    font-size: 13px;
+    margin: 0;
+    font-weight: 400;
+  }
+}
+
+.response-success {
+  background-color: $response-background-success-color;
+  border-left: 5px solid $response-success-color;
+}
+
+.response-warning {
+  background-color: $response-background-warning-color;
+  border-left: 5px solid $response-warning-color;
+}
+
 @mixin box-shadow($left, $top, $radius, $color) {
   box-shadow: $left $top $radius $color;
   -webkit-box-shadow: $left $top $radius $color;

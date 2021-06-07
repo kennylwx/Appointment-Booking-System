@@ -213,5 +213,24 @@ ProfileSelection.defaultProps = {
 ProfileSelection.propTypes = {
   profileList: PropTypes.arrayOf(PropTypes.object),
   updateSelectedProfile: PropTypes.func.isRequired,
-  selectedProfile: PropTypes.number.isRequired,
+  selectedProfile: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    title: PropTypes.string,
+    contactNumber: PropTypes.string,
+    img: PropTypes.string,
+    priceFor30min: PropTypes.number,
+    background: PropTypes.string,
+    language: PropTypes.arrayOf(PropTypes.string),
+    education: PropTypes.arrayOf(PropTypes.shape({
+      school: PropTypes.string,
+      degree: PropTypes.string,
+      year: PropTypes.string,
+    })),
+    schedule: PropTypes.arrayOf(PropTypes.shape({
+      day: PropTypes.string,
+      startTime: PropTypes.string,
+      endTime: PropTypes.string,
+    })),
+  }).isRequired,
 };
