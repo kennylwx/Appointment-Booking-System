@@ -2,7 +2,7 @@
 
 This is an appointment booking system built entirely with React. A lot of the data is fixed, as some of the workflow can only be achieved with a backend server. And given a week's time, this is the extent of my productivity.
 
-The website is hosted at Netlify and you can view it live [here](https://60be1967e3ad6f0007249674--adoring-wescoff-06e007.netlify.app/).
+The website is hosted at Netlify and you can view it live [here](https://adoring-wescoff-06e007.netlify.app/).
 
 ## Things that could be improved upon
 
