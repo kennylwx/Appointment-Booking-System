@@ -1,5 +1,6 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
+
 import Header from '../components/Header';
 import { listOfProfessionals } from '../data';
 import { normaliseDateToReadableString, getAMPMFrm24Hrs } from '../functions';
@@ -50,12 +51,13 @@ function Receipt() {
             </p>
           </div>
           <div className="ra-footer">
-            <button
-              type="button"
+
+            <NavLink
+              to="/"
               className="return-button"
             >
               Return to main page
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>
