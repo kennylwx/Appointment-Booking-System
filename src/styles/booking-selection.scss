@@ -9,6 +9,10 @@ $calendar-weekday-label: #201607;
 $calendar-day-inactive-label: #d3d3d3;
 $calendar-day-active-label: #201607;
 
+$low-availability-color: #ee807f;
+$high-availability-color: #059705c0;
+$medium-availability-color: #ccaf0d;
+
 .booking-selection {
   .bs-header {
     border: 1px solid $border-color;
@@ -174,15 +178,15 @@ $calendar-day-active-label: #201607;
         }
 
         .high-availability {
-          background-color: green;
+          background-color: $high-availability-color;
         }
 
         .medium-availability {
-          background-color: yellow;
+          background-color: $medium-availability-color;
         }
 
         .low-availability {
-          background-color: red;
+          background-color: $low-availability-color;
         }
 
         .availability-label {
@@ -223,11 +227,6 @@ $calendar-day-active-label: #201607;
 }
 
 .time-selector {
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: flex-start;
-  // flex-wrap: wrap;
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin: 8px 0;

@@ -15,6 +15,7 @@ import {
   listOfAppointments,
   listOfDays,
   listOfMonths,
+  listOfBusySchedule,
 } from '../data';
 import { ReactComponent as CalendarIcon } from '../assets/icon/calendar.svg';
 import { ReactComponent as ArrowIcon } from '../assets/icon/arrow.svg';
@@ -31,11 +32,13 @@ function BookingSelection({
   const [selectedCalendarDate, setSelectedCalendarDate] = useState(START_DATE);
   const [calendarDisplay, setCalendarDisplay] = useState(false);
 
-  // const dates = getListOfDates(new Date(), addMonthsToDate(new Date(), BOOKING_DURATION_MONTHS));
-
-  // dates.forEach((date) => {
-  //   console.log(date.get);
-  // });
+  // reset when selectedProfile is changed
+  useEffect(() => {
+    setSelectedTime('');
+    setTimeDisplay([]);
+    setSelectedCalendarDate(START_DATE);
+    setCalendarDisplay(false);
+  }, [selectedProfile]);
 
   const onTimeSelect = (ev) => {
     setSelectedTime(new Date(
@@ -107,7 +110,29 @@ function BookingSelection({
     setTimeDisplay(getListOfAvailableTimes(val));
   };
 
-  const renderCalendarTileContent = (_activeStartDate, date, view) => (view === 'month' && date.getDay() === 0 ? <span className="availability-label high-availability" /> : <span className="availability-label" />);
+  // This is working on fixed data, should be worked out in the backend
+  // or at least iteratively in the front
+  // eslint-disable-next-line no-unused-vars
+  const renderCalendarTileContent = (_activeStartDate, date, _view) => {
+    for (let i = 0; i < listOfBusySchedule.length; i += 1) {
+      const tempDate = new Date(listOfBusySchedule[i].date);
+      const tempAvailability = listOfBusySchedule[i].availability;
+
+      if (date.getFullYear() === tempDate.getFullYear()
+        && date.getMonth() === tempDate.getMonth()
+        && date.getDate() === tempDate.getDate()
+      ) {
+        if (tempAvailability === 'high') {
+          return <span className="availability-label high-availability" />;
+        } if (tempAvailability === 'medium') {
+          return <span className="availability-label medium-availability" />;
+        } if (tempAvailability === 'low') {
+          return <span className="availability-label low-availability" />;
+        }
+      }
+    }
+    return <span className="availability-label" />;
+  };
 
   const renderTimeResponseDisplay = () => {
     if (selectedTime) {
@@ -200,7 +225,6 @@ function BookingSelection({
                 </button>
               ))
               : ''
-
           }
         </div>
 
