@@ -6,7 +6,7 @@ The website is hosted at Netlify and you can view it live [here](https://adoring
 
 ## Things that could be improved upon
 
-1. The time availability (green, yellow) indicator in the calendar dropdown needs is currently fixed. It needs to be iteratively produced from a backend server, and perhaps store in a database at a sessional capacity.
+1. The time availability (green, yellow) indicator in the calendar dropdown needs to be fixed. At the moment, I am fixing the data for each day's availabiliy. This is obviously isn't practical. It needs to be iteratively produced from a backend server, and perhaps store in a database at a sessional capacity.Then fetched during each session.
 
 2. None of the **Professionals** data is saved in a database. It is all bundled up with the website. As the data is relatively small, this wouldn't be an issue for now, but as more appointments are made, the data grows. Therefore, in the long run, the site would feel clunky.
 
