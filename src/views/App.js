@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Container from '../components/Container';
 
 function App() {
+  // eslint-disable-next-line no-unused-vars
   const [appointment, setAppointment] = useState('');
 
   const history = useHistory();
@@ -17,8 +18,6 @@ function App() {
     });
   };
   const updateAppointment = (ap) => {
-    console.log(appointment);
-
     setAppointment(ap);
     handler(ap);
   };

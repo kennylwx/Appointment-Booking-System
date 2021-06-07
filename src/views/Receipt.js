@@ -10,7 +10,6 @@ import '../styles/receipt.scss';
 function Receipt() {
   const location = useLocation();
   const appointmentMade = location.state.app;
-  console.log(appointmentMade);
 
   const getProfile = (id) => {
     for (let i = 0; i < listOfProfessionals.length; i += 1) {
